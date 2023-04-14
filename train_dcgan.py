@@ -87,6 +87,7 @@ def train_discriminator(optimizer, data_real, data_fake):
 
     # get the outputs by doing fake data forward pass
     output_fake = discriminator(data_fake)
+    fake_label = ((((fake_label.unsqueeze(1)).float()).unsqueeze(2)).unsqueeze(3).float())
     loss_fake = criterion(output_fake, fake_label)
 
     # compute gradients of real loss 
