@@ -75,7 +75,7 @@ losses_d = [] # to store discriminator loss after each epoch
 def train_discriminator(optimizer, data_real, data_fake):
     b_size = data_real.size(0)
     # get the real label vector
-    real_label = label_real(b_size)
+    real_label = (label_real(b_size).unsqueeze(1)).float()
     # get the fake label vector
     fake_label = label_fake(b_size)
 
