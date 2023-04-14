@@ -104,7 +104,7 @@ def train_generator(optimizer, data_fake):
     b_size = data_fake.size(0)
     # get the real label vector
     real_label = (label_real(b_size).squeeze()).float()
-
+    real_label = ((((real_label.unsqueeze(1)).float()).unsqueeze(2)).unsqueeze(3).float())
     optimizer.zero_grad()
 
     # output by doing a forward pass of the fake data through discriminator
