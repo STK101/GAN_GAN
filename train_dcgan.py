@@ -77,7 +77,7 @@ def train_discriminator(optimizer, data_real, data_fake):
     # get the real label vector
     real_label = (label_real(b_size).unsqueeze(1)).float()
     # get the fake label vector
-    fake_label = label_fake(b_size)
+    fake_label = (label_fake(b_size).unsqueeze(1)).float()
 
     optimizer.zero_grad()
 
@@ -102,7 +102,7 @@ def train_discriminator(optimizer, data_real, data_fake):
 def train_generator(optimizer, data_fake):
     b_size = data_fake.size(0)
     # get the real label vector
-    real_label = label_real(b_size)
+    real_label = (label_real(b_size).unsqueeze(1)).float()
 
     optimizer.zero_grad()
 
