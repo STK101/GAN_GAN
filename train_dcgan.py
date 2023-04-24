@@ -5,7 +5,7 @@ import torch.optim as optim
 import torchvision.datasets as datasets
 import numpy as np
 import matplotlib
-
+import gc
 from utils import save_generator_image, weights_init
 from utils import label_fake, label_real, create_noise
 from dcgan import Generator, Discriminator
