@@ -96,7 +96,12 @@ def train_discriminator(optimizer, data_real, data_fake):
     loss_fake.backward()
     # update discriminator parameters
     optimizer.step()
-
+    del output_real
+    del real_label
+    del output_fake
+    del fake_label
+    gc.collect()
+    torch.cuda.empty_cache()
     return loss_real + loss_fake
 
 # function to train the generator network
@@ -115,7 +120,10 @@ def train_generator(optimizer, data_fake):
     loss.backward()
     # update generator parameters
     optimizer.step()
-
+    del output
+    del real_label
+    gc.collect()
+    torch.cuda.empty_cache()
     return loss    
 
 # create the noise vector
@@ -152,7 +160,12 @@ for epoch in range(epochs):
 
     print(f"Epoch {epoch+1} of {epochs}")
     print(f"Generator loss: {epoch_loss_g:.8f}, Discriminator loss: {epoch_loss_d:.8f}")
-
+    del loss_d
+    del loss_g
+    del epoch_loss_g
+    del epoch_loss_d
+    gc.collect()
+    torch.cuda.empty_cache() 
 print('DONE TRAINING')
 # save the model weights to disk
 torch.save(generator.state_dict(), 'outputs/generator.pth')
