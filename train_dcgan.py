@@ -137,6 +137,8 @@ discriminator.train()
 for epoch in range(epochs):
     loss_g = 0.0
     loss_d = 0.0
+    generated_img = generator(noise).cpu().detach()
+    save_generator_image(generated_img, f"outputs/gen_img{100}.png")
     for bi, data in tqdm(enumerate(train_loader), total=int(len(train_data)/train_loader.batch_size)):
         image, _ = data
         image = image.to(device)
